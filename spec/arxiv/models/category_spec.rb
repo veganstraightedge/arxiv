@@ -4,7 +4,6 @@ module Arxiv
   describe Category do
     before(:all) do
       @category = Arxiv.get('1202.0819').primary_category
-      @legacy_category = Arxiv.get('math.DG/0510097v1').categories.last
     end
 
     describe "abbreviation" do
@@ -25,7 +24,9 @@ module Arxiv
       end
 
       it "should return only the abbreviation when a description cannot be found (e.g. MSC classes)"do
-        expect(@legacy_category.long_description).to eql("58D15 (Primary); 58B10 (Secondary)")
+        category = Category.new
+        category.abbreviation = "58D15 (Primary); 58B10 (Secondary)"
+        expect(category.long_description).to eql("58D15 (Primary); 58B10 (Secondary)")
       end
     end
 
