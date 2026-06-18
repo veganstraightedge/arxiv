@@ -2,7 +2,7 @@ require 'spec_helper'
 
 module Arxiv
   describe Link do
-    before(:all) { @link = Arxiv.get('1202.0819').links.last }
+    before(:all) { @link = Arxiv.get('1202.0819').links.find { |l| l.content_type == 'application/pdf' } }
 
     describe "content_type" do
       it "should fetch the link's content type" do
@@ -12,7 +12,7 @@ module Arxiv
 
     describe "url" do
       it "should fetch the link's url" do
-        expect(@link.url).to eql('http://arxiv.org/pdf/1202.0819v1')
+        expect(@link.url).to eql('https://arxiv.org/pdf/1202.0819v1')
       end
     end
 

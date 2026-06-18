@@ -47,7 +47,7 @@ module Arxiv
   end
 
   def self.parse_arxiv_identifier(identifier)
-    if valid_id?(identifier)
+    id = if valid_id?(identifier)
       identifier
     elsif valid_url?(identifier)
       format = legacy_url?(identifier) ? LEGACY_URL_FORMAT : CURRENT_URL_FORMAT
@@ -55,8 +55,19 @@ module Arxiv
     else
       identifier # probably an error
     end
+
+    normalize_legacy_id(id)
   end
   private_class_method :parse_arxiv_identifier
+
+  # In April 2007, arxiv dropped the subject-class suffix from legacy identifiers
+  # (e.g. `math.DG/0510097` became `math/0510097`). The website still 301-redirects
+  # the old form, but the API at /api/query?id_list=math.DG/0510097 silently returns
+  # no results. Normalize so callers can pass either form.
+  def self.normalize_legacy_id(id)
+    id.sub(/\A([^.\/]+)\.[^\/]+\//, '\1/')
+  end
+  private_class_method :normalize_legacy_id
 
   def self.valid_id?(identifier)
     identifier =~ ID_FORMAT || identifier =~ LEGACY_ID_FORMAT
