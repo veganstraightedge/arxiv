@@ -2,6 +2,20 @@ require 'spec_helper'
 
 module Arxiv
   describe Category do
+    describe ".types" do
+      it "parses the bundled abbreviation-to-description mapping (no network)" do
+        expect(Category.types).not_to be_empty
+      end
+
+      it "maps a long-standing abbreviation to its description" do
+        expect(Category.types["astro-ph.IM"]).to eql("Physics - Instrumentation and Methods for Astrophysics")
+      end
+
+      it "maps a recently added abbreviation to its description" do
+        expect(Category.types["eess.SP"]).to eql("Electrical Engineering and Systems Science - Signal Processing")
+      end
+    end
+
     before(:all) do
       @category = Arxiv.get('1202.0819').primary_category
     end
