@@ -6,6 +6,11 @@ Gem::Specification.new do |s|
   s.authors     = ["Scholastica"]
   s.email       = ["coryschires@gmail.com"]
   s.homepage    = "https://github.com/scholastica/arxiv"
+  s.metadata    = {
+    "bug_tracker_uri" => "https://github.com/scholastica/arxiv/issues",
+    "homepage_uri"    => "https://github.com/scholastica/arxiv",
+    "source_code_uri" => "https://github.com/scholastica/arxiv"
+  }
   s.summary     = "Ruby wrapper accessing the arXiv API"
   s.description = "Easily access arXiv article info – including authors, categories, links, etc."
   s.licenses    = ['MIT']
