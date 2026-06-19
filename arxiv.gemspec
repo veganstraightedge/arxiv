@@ -16,7 +16,8 @@ Gem::Specification.new do |s|
   s.licenses    = ['MIT']
 
   s.files         = `git ls-files`.split("\n")
-  s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
+  s.bindir        = "exe"
+  s.executables   = `git ls-files -- exe/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
   # specify any dependencies here; for example:
