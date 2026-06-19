@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
   }
   spec.summary     = "Ruby wrapper accessing the arXiv API"
   spec.description = "Easily access arXiv article info – including authors, categories, links, etc."
-  spec.licenses    = ['MIT']
+  spec.licenses    = ["MIT"]
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
@@ -29,7 +29,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   # specify any dependencies here; for example:
-  spec.add_dependency "happymapper", '~> 0.4', '>= 0.4.1'
-  spec.add_dependency "nokogiri",    '~> 1.6', '>= 1.6.6.2'
-  spec.add_dependency "full-name-splitter", '~> 0.1.2'
+  spec.add_dependency "happymapper", "~> 0.4", ">= 0.4.1"
+  spec.add_dependency "nokogiri",    "~> 1.6", ">= 1.6.6.2"
+  spec.add_dependency "full-name-splitter", "~> 0.1.2"
 end
