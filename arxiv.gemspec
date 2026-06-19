@@ -24,7 +24,4 @@ Gem::Specification.new do |spec|
   spec.add_dependency "happymapper", '~> 0.4', '>= 0.4.1'
   spec.add_dependency "nokogiri",    '~> 1.6', '>= 1.6.6.2'
   spec.add_dependency "full-name-splitter", '~> 0.1.2'
-
-  spec.add_development_dependency "rspec", '~> 3.3', '>= 3.3.0'
-  spec.add_development_dependency "pry",   '~> 0.10.2'
 end
