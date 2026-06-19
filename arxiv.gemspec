@@ -1,5 +1,4 @@
-$:.push File.expand_path("../lib", __FILE__)
-require "arxiv/version"
+require_relative "lib/arxiv/version"
 
 Gem::Specification.new do |s|
   s.name        = "arxiv"
