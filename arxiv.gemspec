@@ -11,6 +11,7 @@ Gem::Specification.new do |s|
   s.summary     = "Ruby wrapper accessing the arXiv API"
   s.description = "Easily access arXiv article info – including authors, categories, links, etc."
   s.licenses    = ['MIT']
+  s.required_ruby_version = ">= 3.3"
   s.rubyforge_project = "arxiv"
 
   s.files         = `git ls-files`.split("\n")
