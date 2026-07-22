@@ -24,6 +24,14 @@ module Arxiv
       it "should fetch a manuscript when passed an id with more than 4 digits" do
         expect(Arxiv.get('1509.06369')).to fetch("Tidal debris morphology and the orbits of satellite galaxies")
       end
+
+      it "should fetch a manuscript when passed a PDF URL" do
+        expect(Arxiv.get('https://arxiv.org/pdf/1202.0819')).to fetch("Laser frequency comb techniques for precise astronomical spectroscopy")
+      end
+
+      it "should fetch a manuscript when passed a PDF URL with a .pdf extension" do
+        expect(Arxiv.get('https://arxiv.org/pdf/1202.0819.pdf')).to fetch("Laser frequency comb techniques for precise astronomical spectroscopy")
+      end
     end
 
     context "when using the legacy arXiv id format" do
@@ -37,6 +45,10 @@ module Arxiv
 
       it "should fetch a manuscript when passed full URL" do
         expect(Arxiv.get('http://arxiv.org/abs/math.DG/0510097')).to fetch("The differential topology of loop spaces")
+      end
+
+      it "should fetch a manuscript when passed a PDF URL with a .pdf extension" do
+        expect(Arxiv.get('https://arxiv.org/pdf/math.DG/0510097.pdf')).to fetch("The differential topology of loop spaces")
       end
     end
 
