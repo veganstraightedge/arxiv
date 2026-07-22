@@ -9,6 +9,8 @@ module Arxiv
     element :title, StringScrubber, parser: :scrub
     element :summary, StringScrubber, parser: :scrub
     element :comment, StringScrubber, parser: :scrub
+    element :doi, String
+    element :journal_ref, StringScrubber, parser: :scrub
     has_one :primary_category, Category
     has_many :categories, Category
     has_many :authors, Author

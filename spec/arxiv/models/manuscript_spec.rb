@@ -37,6 +37,27 @@ module Arxiv
       end
     end
 
+    describe "doi" do
+      it "should fetch the manuscript's DOI when one has been registered" do
+        expect(@manuscript.doi).to eql("10.1111/j.1365-2966.2012.20656.x")
+      end
+
+      it "should return nil when the manuscript has no DOI" do
+        expect(@legacy_manuscript.doi).to be_nil
+      end
+    end
+
+    describe "journal_ref" do
+      it "should fetch the manuscript's journal reference when one has been registered" do
+        published_manuscript = Arxiv.get('1207.7214')
+        expect(published_manuscript.journal_ref).to eql("Phys.Lett. B716 (2012) 1-29")
+      end
+
+      it "should return nil when the manuscript has no journal reference" do
+        expect(@manuscript.journal_ref).to be_nil
+      end
+    end
+
     describe "comment" do
       it "should fetch the manuscript's comment" do
         expect(@manuscript.comment).to eql("11 pages, 7 figures. Accepted for publication in MNRAS")
