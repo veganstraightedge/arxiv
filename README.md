@@ -1,4 +1,4 @@
-A Ruby wrapper for the [arXiv API](https://info.arxiv.org/help/api/index.html). ArXiv is an open access pre-print server used primarily in physics, mathematics, computer science, quantitative biology, quantitative finance and statistics.
+A Ruby wrapper for the [arXiv API](https://info.arxiv.org/help/api). ArXiv is an open access pre-print server used primarily in physics, mathematics, computer science, quantitative biology, quantitative finance and statistics.
 
 _This is not a complete wrapper around the arXiv API. We'll be making improvements as needed for our overlay journals. If you'd like something added, please create an issue or pull request._
 
