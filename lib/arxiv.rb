@@ -1,6 +1,6 @@
 require 'open-uri'
 require 'nokogiri'
-require 'happymapper'
+require 'nokogiri-happymapper'
 require 'full-name-splitter'
 
 require 'arxiv/version'
