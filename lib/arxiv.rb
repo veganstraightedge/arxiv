@@ -47,7 +47,7 @@ module Arxiv
   end
 
   def self.parse_arxiv_identifier(identifier)
-    identifier = identifier.sub(/\.pdf\z/, '')
+    identifier = identifier.delete_suffix(".pdf")
 
     id = if valid_id?(identifier)
       identifier
