@@ -23,6 +23,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "nokogiri",    '~> 1.6', '>= 1.6.6.2'
   s.add_runtime_dependency "full-name-splitter", '~> 0.1.2'
 
+  s.add_development_dependency "rake",  '~> 13.4'
   s.add_development_dependency "rspec", '~> 3.3', '>= 3.3.0'
   s.add_development_dependency "pry",   '~> 0.10.2'
 end
