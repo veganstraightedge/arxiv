@@ -5,6 +5,7 @@ require 'full-name-splitter'
 
 require 'arxiv/version'
 require 'arxiv/string_scrubber'
+require 'arxiv/identifier'
 
 require 'arxiv/models/author'
 require 'arxiv/models/link'
@@ -32,11 +33,7 @@ module Arxiv
   ID_FORMAT = /^#{CURRENT_URL_FORMAT}/
 
   def self.get(identifier)
-    id = parse_arxiv_identifier(identifier)
-
-    unless id =~ ID_FORMAT || id =~ LEGACY_ID_FORMAT
-      raise Arxiv::Error::MalformedId, "Manuscript ID format is invalid"
-    end
+    id = Identifier.new(identifier).to_s
 
     url = ::URI.parse("http://export.arxiv.org/api/query?id_list=#{id}")
     response = ::Nokogiri::XML(URI.open(url)).remove_namespaces!
@@ -46,41 +43,4 @@ module Arxiv
     manuscript
   end
 
-  def self.parse_arxiv_identifier(identifier)
-    id = if valid_id?(identifier)
-      identifier
-    elsif valid_url?(identifier)
-      format = legacy_url?(identifier) ? LEGACY_URL_FORMAT : CURRENT_URL_FORMAT
-      identifier.match(/(#{format})/)[1]
-    else
-      identifier # probably an error
-    end
-
-    normalize_legacy_id(id)
-  end
-  private_class_method :parse_arxiv_identifier
-
-  # In April 2007, arxiv dropped the subject-class suffix from legacy identifiers
-  # (e.g. `math.DG/0510097` became `math/0510097`). The website still 301-redirects
-  # the old form, but the API at /api/query?id_list=math.DG/0510097 silently returns
-  # no results. Normalize so callers can pass either form.
-  def self.normalize_legacy_id(id)
-    id.sub(/\A([^.\/]+)\.[^\/]+\//, '\1/')
-  end
-  private_class_method :normalize_legacy_id
-
-  def self.valid_id?(identifier)
-    identifier =~ ID_FORMAT || identifier =~ LEGACY_ID_FORMAT
-  end
-  private_class_method :valid_id?
-
-  def self.valid_url?(identifier)
-    identifier =~ LEGACY_URL_FORMAT || identifier =~ CURRENT_URL_FORMAT
-  end
-  private_class_method :valid_url?
-
-  def self.legacy_url?(identifier)
-    identifier =~ LEGACY_URL_FORMAT
-  end
-  private_class_method :legacy_url?
 end

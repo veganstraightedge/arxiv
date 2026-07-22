@@ -52,34 +52,4 @@ module Arxiv
 
   end
 
-  # NOTE: This describe block tests a private method (via `.send`) which is
-  # unusual for this codebase. It's here to make the regex's behavior visible
-  # at PR-review time across the various legacy ID forms arxiv has historically
-  # used. Feel free to drop this block — the behavior is also covered indirectly
-  # by the legacy-id specs above.
-  describe "normalize_legacy_id (private)" do
-    cases = {
-      # legacy with subject class -> stripped to bare archive
-      "math.DG/0510097"         => "math/0510097",
-      "math.DG/0510097v1"       => "math/0510097v1",
-      "cond-mat.dis-nn/9912001" => "cond-mat/9912001",
-
-      # already-canonical legacy -> unchanged
-      "math/0510097"     => "math/0510097",
-      "math/0510097v1"   => "math/0510097v1",
-      "cs/0002001"       => "cs/0002001",
-      "cond-mat/9912001" => "cond-mat/9912001",
-
-      # current id format (no slash) -> unchanged
-      "1202.0819"   => "1202.0819",
-      "1202.0819v1" => "1202.0819v1",
-      "1509.06369"  => "1509.06369",
-    }
-
-    cases.each do |input, expected|
-      it "#{input.inspect} -> #{expected.inspect}" do
-        expect(Arxiv.send(:normalize_legacy_id, input)).to eql(expected)
-      end
-    end
-  end
 end
