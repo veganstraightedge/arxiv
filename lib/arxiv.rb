@@ -38,7 +38,7 @@ module Arxiv
       raise Arxiv::Error::MalformedId, "Manuscript ID format is invalid"
     end
 
-    url = ::URI.parse("http://export.arxiv.org/api/query?id_list=#{id}")
+    url = ::URI.parse("https://export.arxiv.org/api/query?id_list=#{id}")
     response = ::Nokogiri::XML(URI.open(url)).remove_namespaces!
     manuscript = Arxiv::Manuscript.parse(response.to_s, single: id)
 
