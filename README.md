@@ -25,7 +25,7 @@ Look up a manuscript's authors:
 
 ```ruby
 authors = manuscript.authors  # => an array of all the manuscript's authors
-authors.map(&:name)   # => ["Michael T. Murphy", "Clayton R. Locke", "Philip S. Light", "Andre N. Luiten", "Jon S. Lawrence"]
+authors.map(&:name)           # => ["Michael T. Murphy", "Clayton R. Locke", "Philip S. Light", "Andre N. Luiten", "Jon S. Lawrence"]
 
 # a single author
 authors.last.name           # => "Jon S. Lawrence"
