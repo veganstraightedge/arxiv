@@ -47,6 +47,8 @@ module Arxiv
   end
 
   def self.parse_arxiv_identifier(identifier)
+    identifier = identifier.sub(/\.pdf\z/, '')
+
     id = if valid_id?(identifier)
       identifier
     elsif valid_url?(identifier)
