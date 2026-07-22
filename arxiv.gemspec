@@ -12,6 +12,7 @@ Gem::Specification.new do |s|
   s.description = "Easily access arXiv article info – including authors, categories, links, etc."
   s.licenses    = ['MIT']
   s.rubyforge_project = "arxiv"
+  s.metadata    = { 'rubygems_mfa_required' => 'true' }
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
