@@ -39,11 +39,24 @@ module Arxiv
     end
 
     url = ::URI.parse("http://export.arxiv.org/api/query?id_list=#{id}")
-    response = ::Nokogiri::XML(URI.open(url)).remove_namespaces!
-    manuscript = Arxiv::Manuscript.parse(response.to_s, single: id)
+    manuscript = parse(URI.open(url))
 
     raise Arxiv::Error::ManuscriptNotFound, "Manuscript #{id} doesn't exist on arXiv" if manuscript&.title.nil?
     manuscript
+  end
+
+  # Parse an arxiv API Atom response into a Manuscript, for callers who fetch
+  # the XML themselves (bring your own HTTP: rate limiting, User-Agent,
+  # caching, etc). `Arxiv.get` is the convenience wrapper around this.
+  #
+  # Handles the namespace stripping the arxiv payload needs before HappyMapper
+  # can see the arxiv:-namespaced fields (comment, primary_category,
+  # affiliations, ...).
+  #
+  # Returns nil if the feed contains no manuscript.
+  def self.parse(xml)
+    response = ::Nokogiri::XML(xml).remove_namespaces!
+    Arxiv::Manuscript.parse(response.to_s, single: true)
   end
 
   def self.parse_arxiv_identifier(identifier)

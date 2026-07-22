@@ -16,6 +16,14 @@ And inspect it:
     manuscript.version    # => 1
     manuscript.pdf_url    # => "http://arxiv.org/pdf/1202.0819v1"
 
+### Bring your own HTTP
+`Arxiv.get` is a convenience wrapper: it fetches the Atom XML from the arXiv API and hands it to `Arxiv.parse`. If you need control over the HTTP layer — rate limiting, a custom User-Agent, caching, retries — fetch the XML yourself and parse it directly:
+
+```ruby
+xml = your_http_client.get("https://export.arxiv.org/api/query?id_list=1202.0819").body
+manuscript = Arxiv.parse(xml)  # => an Arxiv::Manuscript, or nil if the feed is empty
+```
+
 ### Authors
 Look up a manuscript's authors:
 

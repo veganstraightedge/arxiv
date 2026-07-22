@@ -52,6 +52,27 @@ module Arxiv
 
   end
 
+  describe "parse" do
+    fixtures = File.expand_path('../fixtures', __dir__)
+
+    it "should parse a manuscript from an Atom response the caller fetched themselves" do
+      xml = File.read(File.join(fixtures, '1202.0819.xml'))
+      expect(Arxiv.parse(xml)).to fetch("Laser frequency comb techniques for precise astronomical spectroscopy")
+    end
+
+    it "should parse namespaced fields without any caller-side preprocessing" do
+      xml = File.read(File.join(fixtures, '1202.0819.xml'))
+      manuscript = Arxiv.parse(xml)
+      expect(manuscript.comment).to eql("11 pages, 7 figures. Accepted for publication in MNRAS")
+      expect(manuscript.primary_category.abbreviation).to eql("astro-ph.IM")
+    end
+
+    it "should return nil when the feed has no entries" do
+      xml = File.read(File.join(fixtures, '1234.1234.xml'))
+      expect(Arxiv.parse(xml)).to be_nil
+    end
+  end
+
   # NOTE: This describe block tests a private method (via `.send`) which is
   # unusual for this codebase. It's here to make the regex's behavior visible
   # at PR-review time across the various legacy ID forms arxiv has historically
