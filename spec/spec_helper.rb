@@ -21,8 +21,12 @@ RSpec.configure do |config|
     Dir[File.join(__dir__, 'fixtures', '*.xml')].sort.each do |fixture|
       id = File.basename(fixture, '.xml').tr('_', '/')
 
-      WebMock::API.stub_request(:get, "http://export.arxiv.org/api/query?id_list=#{id}")
-        .to_return(body: File.read(fixture), headers: { 'Content-Type' => 'application/atom+xml' })
+      # Stub both schemes so this doesn't depend on whether the gem queries
+      # http:// (and open-uri follows arxiv's 301) or https:// directly.
+      %w[http https].each do |scheme|
+        WebMock::API.stub_request(:get, "#{scheme}://export.arxiv.org/api/query?id_list=#{id}")
+          .to_return(body: File.read(fixture), headers: { 'Content-Type' => 'application/atom+xml' })
+      end
     end
   end
 end
