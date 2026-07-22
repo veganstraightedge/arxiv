@@ -97,6 +97,28 @@ module Arxiv
       end
     end
 
+    describe "abstract_url" do
+      it "should return the url of the manuscript's abstract page for a current manuscript" do
+        expect(@manuscript.abstract_url).to eql('https://arxiv.org/abs/1202.0819v1')
+      end
+
+      it "should return the url of the manuscript's abstract page for a legacy manuscript" do
+        expect(@legacy_manuscript.abstract_url).to eql('https://arxiv.org/abs/math/0510097v1')
+      end
+    end
+
+    describe "html_url" do
+      it "should return the url of the manuscript's full-text HTML version" do
+        expect(@manuscript.html_url).to eql('https://arxiv.org/html/1202.0819v1')
+      end
+    end
+
+    describe "source_url" do
+      it "should return the url to download the manuscript's TeX/LaTeX source" do
+        expect(@manuscript.source_url).to eql('https://arxiv.org/src/1202.0819v1')
+      end
+    end
+
     describe "authors" do
       it "should return an array of all the manuscript's authors" do
         expect(@manuscript.authors.size).to eql(5)

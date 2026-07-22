@@ -55,5 +55,17 @@ module Arxiv
       end
     end
 
+    def abstract_url
+      "https://arxiv.org/abs/#{arxiv_versioned_id}"
+    end
+
+    def html_url
+      "https://arxiv.org/html/#{arxiv_versioned_id}"
+    end
+
+    def source_url
+      "https://arxiv.org/src/#{arxiv_versioned_id}"
+    end
+
   end
 end
